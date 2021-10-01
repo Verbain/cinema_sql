@@ -1,0 +1,9 @@
+<%- include('./navbar.ejs') %>
+
+    <h1>WELCOME FROM HOME</h1>
+    <h2>LES FILMS A L'AFFICHE</h2>
+    <% for(var i = 0; i <data.length; i++){%>
+        <li><a><%= data[i].film_name %> SEANCE LE : <%= data[i].seance_date %></a></li>  
+    <%}%>
+</body>
+</html>

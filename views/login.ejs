@@ -1,0 +1,15 @@
+<%- include('./navbar.ejs') %>
+
+    <form action="/api/login" method="POST">
+        <div class="mb-3">
+            <label for="InputFirstname" class="form-label">Firstname</label>
+            <input type="text" name="Firstname" class="form-control" id="InputFirstname" >
+        </div>
+        <div class="mb-3">
+            <label for="Password" class="form-label">Password</label>
+            <input type="Password" name="Password" class="form-control" id="Password">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</body>
+</html> 
