@@ -4,6 +4,7 @@ class navigationController{
     homepage(req,res){
         const session = req.session
         db.select().table('film_day').then(data => {
+            console.log(data)
             res.render('home',{data,session})
         })
     }

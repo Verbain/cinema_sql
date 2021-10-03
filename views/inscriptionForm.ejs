@@ -1,5 +1,6 @@
-<%- include('./navbar.ejs') %> 
-   <form action="/api/newUser" method="POST">
+<%- include('./header.ejs') %> 
+
+   <form action="/api/newUser" autocomplete="off" method="POST">
         <div class="mb-3">
             <label for="InputFirstname" class="form-label">Firstname</label>
             <input type="text" name="Firstname" class="form-control" id="InputFirstname" >
@@ -10,14 +11,15 @@
         </div>
         <div class="mb-3">
                 <label for="InputEmail" class="form-label">Email</label>
-                <input type="text" name="Email"class="form-control" id="InputEmail" >          </div>
+                <input type="text" name="Email"class="form-control" id="InputEmail" >          
+        </div>
         <div class="mb-3">
                 <label for="InputPhone" class="form-label">Phone</label>
                 <input type="text" name="Phone"class="form-control" id="InputPhone" >
         </div>
         <div class="mb-3">
                 <label for="InputBirthdate" class="form-label">Birthdate</label>
-                <input type="text" name="Birthdate"class="form-control" id="InputBirthdate" >
+                <input type="text" name="Birthdate" class="form-control" id="datepick">
         </div>
         <div class="mb-3">
             <label for="Password" class="form-label">Password</label>
@@ -25,5 +27,13 @@
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
-</body>
-</html>
+
+    <script>
+        $(document).ready(function(){
+            $(function () {
+              $('#datepick').datepicker();
+            });   
+          });
+    </script>
+    
+<%- include('./footer.ejs') %>

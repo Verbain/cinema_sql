@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>HOME</title>
+  <!--BOOTSTRAP-->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+  <!--CSS-->
+  <link href="/css/header.css" rel="stylesheet" type="text/css">
+  <link href="/css/footer.css" rel="stylesheet" type="text/css">
+  
+
+  <!--DATE PICKER IMPORT-->
+  <link rel="stylesheet" type="text/css" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/smoothness/jquery-ui.css" media="all">
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+  <script>
+  $(function() {
+      $('#datepick').datepicker();
+  });
+  </script>
+</head>
+<body>
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+      <a class="navbar-brand" href="http://localhost:3000">
+          <img src="https://pbs.twimg.com/profile_images/1097550275353759745/5Xm5apPf_400x400.png" class="rounded-circle" width="50" height="50"/>
+      </a>
+    </div>
+    <div class="mx-auto order-0 fill"></div>
+      <ul class="navbar-nav">
+        <% if(!session.user_credential){%>
+          <li class="nav-item active mx-3">
+            <a class="nav-link" href="/login"><strong>LOGIN</strong></a>
+          </li>
+        <%}%>
+        <% if(session.user_credential){%>
+          <li class="nav-item active mx-3">
+            <a class="nav-link" href="/logout"><strong></strong>LOGOUT</strong></a>
+          </li>
+        <%}%>
+        <li class="nav-item active mx-3"><a class="nav-link" href=""><strong></strong>redirect1</strong></a></li>
+        <li class="nav-item active mx-3"><a class="nav-link" href=""><strong></strong>redirect2</strong></a></li>
+        <li class="nav-item active mx-3"><a class="nav-link" href=""><strong></strong>redirect3</strong></a></li>
+      </ul>
+    </div>
+    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2"></div>
+  </nav>

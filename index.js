@@ -9,6 +9,7 @@ const usersController = require('./src/controllers/usersController');
 
 const urlEncodedParser = bodyParser.urlencoded({extended : false})
 
+
 app.use(express.json());
 app.use(cors());
 app.use(session({
@@ -18,7 +19,8 @@ app.use(session({
 }))
 //set templating engine
 app.set('view engine','ejs')
-
+//set css for ejs
+app.use(express.static(__dirname+'/style'))
 //ROUTING
 app.get('/',navigationController.homepage)
 app.get('/inscription',navigationController.inscription)
