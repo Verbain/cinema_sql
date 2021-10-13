@@ -18,13 +18,13 @@ class usersController{
     async login(req,res){
         try{
             const log = await usersService.login(req.body);
-            console.log(log)
             if (log!=404){
-                req.session.user_credential = log
+                req.session.role = log.role
+                req.session.user_id = log.id_user
                 console.log(req.session)
                 res.redirect('/')
                 } else {
-                    res.status.json({
+                    res.status(201).json({
                         status:201,
                         response:"acces denied user not found"
                     })
