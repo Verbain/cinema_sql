@@ -31,7 +31,10 @@
     <script>
         $(document).ready(function(){
             $(function () {
-              $('#datepick').datepicker();
+              $('#datepick').datepicker({
+                  dateFormat:"yyyy-mm-dd"
+              });
+              $('#datepick').datepicker("option","dateFormat",("yy-mm-dd"));
             });   
           });
     </script>

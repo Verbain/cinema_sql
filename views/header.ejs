@@ -30,19 +30,27 @@
     </div>
     <div class="mx-auto order-0 fill"></div>
       <ul class="navbar-nav">
-        <% if(!session.user_credential){%>
+        <% if(!session.user_id){%>
           <li class="nav-item active mx-3">
             <a class="nav-link" href="/login"><strong>LOGIN</strong></a>
           </li>
+          <li class="nav-item active mx-3">
+            <a class="nav-link" href="/inscription"><strong>inscription</strong></a>
+          </li>
         <%}%>
-        <% if(session.user_credential){%>
+        <% if(session.user_id){%>
           <li class="nav-item active mx-3">
             <a class="nav-link" href="/logout"><strong></strong>LOGOUT</strong></a>
           </li>
         <%}%>
-        <li class="nav-item active mx-3"><a class="nav-link" href=""><strong></strong>redirect1</strong></a></li>
-        <li class="nav-item active mx-3"><a class="nav-link" href=""><strong></strong>redirect2</strong></a></li>
-        <li class="nav-item active mx-3"><a class="nav-link" href=""><strong></strong>redirect3</strong></a></li>
+        <% if(session.role == 'user'){%>
+          <li class="nav-item active mx-3">
+            <a class="nav-link" href=""><strong>redirect3</strong></a>
+          </li>
+        <%}%>
+        <% if(session.role == 'admin'){%>
+        <li class="nav-item active mx-3"><a class="nav-link" href="/seance"><strong></strong>create seance</strong></a></li>
+        <%}%>
       </ul>
     </div>
     <div class="navbar-collapse collapse w-100 order-3 dual-collapse2"></div>

@@ -30,7 +30,9 @@ id_seance INT NOT NULL AUTO_INCREMENT UNIQUE,
 id_salle INT NOT NULL,
 id_film INT NOT NULL,
 seance_date TIMESTAMP NOT NULL,
+nb_place INT NOT NULL,
 PRIMARY KEY(id_seance),
+CONSTRAINT `nb_place_above_0` CHECK(nb_place >= 0),
 CONSTRAINT `fk_seance_salle` FOREIGN KEY(id_salle) REFERENCES salles(id_salle),
 CONSTRAINT `fk_seance_film` FOREIGN KEY(id_film) REFERENCES films(id_film)
 );
@@ -55,6 +57,42 @@ CONSTRAINT `max_quantity` CHECK(quantity <=4),
 CONSTRAINT `fk_reservation_seance` FOREIGN KEY(id_seance) REFERENCES seances(id_seance),
 CONSTRAINT `fk_reservation_user` FOREIGN KEY(id_user) REFERENCES users(id_user)
 );
+CREATE TABLE hours(
+hours VARCHAR(255)
+);
+insert into hours VALUE('8:00');
+insert into hours VALUE('8:30');
+insert into hours VALUE('9:00');
+insert into hours VALUE('9:30');
+insert into hours VALUE('10:00');
+insert into hours VALUE('10:30');
+insert into hours VALUE('11:00');
+insert into hours VALUE('11:30');
+insert into hours VALUE('12:00');
+insert into hours VALUE('12:30');
+insert into hours VALUE('13:00');
+insert into hours VALUE('13:30');
+insert into hours VALUE('14:00');
+insert into hours VALUE('14:30');
+insert into hours VALUE('15:00');
+insert into hours VALUE('15:30');
+insert into hours VALUE('16:00');
+insert into hours VALUE('16:30');
+insert into hours VALUE('17:00');
+insert into hours VALUE('17:30');
+insert into hours VALUE('18:00');
+insert into hours VALUE('18:30');
+insert into hours VALUE('19:00');
+insert into hours VALUE('19:30');
+insert into hours VALUE('20:00');
+insert into hours VALUE('20:30');
+insert into hours VALUE('21:00');
+insert into hours VALUE('21:30');
+insert into hours VALUE('22:00');
+insert into hours VALUE('22:30');
+
+
+
 
 SET @max_quantity_salle_1 := 35;
 SET @max_quantity_salle_2 := 20;
@@ -69,7 +107,7 @@ INSERT INTO seances VALUE(null,1,1,'2021-10-15 16:00:00');
 #View for films day +1 
 CREATE VIEW film_day1 AS
 SELECT seances.seance_date,
-salles.salle_name,salles.nb_place,
+salles.salle_name,seances.nb_place,
 films.film_name,films.affiche_url,films.realease_date,films.duration,
 films.filmaker,films.genre 
 FROM seances 
@@ -80,7 +118,7 @@ WHERE date_format(seance_date,'%y-%m-%d') = current_date() + interval 1 DAY ;
 #View for film day +2
 CREATE VIEW film_day2 AS
 SELECT seances.seance_date,
-salles.salle_name,salles.nb_place,
+salles.salle_name,seances.nb_place,
 films.film_name,films.affiche_url,films.realease_date,films.duration,
 films.filmaker,films.genre 
 FROM seances 
@@ -91,7 +129,7 @@ WHERE date_format(seance_date,'%y-%m-%d') = current_date() + interval 2 DAY ;
 #View for film day+3
 CREATE VIEW film_day3 AS
 SELECT seances.seance_date,
-salles.salle_name,salles.nb_place,
+salles.salle_name,seances.nb_place,
 films.film_name,films.affiche_url,films.realease_date,films.duration,
 films.filmaker,films.genre 
 FROM seances 
@@ -102,7 +140,7 @@ WHERE date_format(seance_date,'%y-%m-%d') = current_date() + interval 3 DAY ;
 #View for film day+4
 CREATE VIEW film_day4 AS
 SELECT seances.seance_date,
-salles.salle_name,salles.nb_place,
+salles.salle_name,seances.nb_place,
 films.film_name,films.affiche_url,films.realease_date,films.duration,
 films.filmaker,films.genre 
 FROM seances 
@@ -113,7 +151,7 @@ WHERE date_format(seance_date,'%y-%m-%d') = current_date() + interval 4 DAY ;
 #View for film day +5
 CREATE VIEW film_day5 AS
 SELECT seances.seance_date,
-salles.salle_name,salles.nb_place,
+salles.salle_name,seances.nb_place,
 films.film_name,films.affiche_url,films.realease_date,films.duration,
 films.filmaker,films.genre 
 FROM seances 
@@ -124,7 +162,7 @@ WHERE date_format(seance_date,'%y-%m-%d') = current_date() + interval 5 DAY ;
 #view for film day +6
 CREATE VIEW film_day6 AS
 SELECT seances.seance_date,
-salles.salle_name,salles.nb_place,
+salles.salle_name,seances.nb_place,
 films.film_name,films.affiche_url,films.realease_date,films.duration,
 films.filmaker,films.genre 
 FROM seances 
@@ -134,8 +172,8 @@ WHERE date_format(seance_date,'%y-%m-%d') = current_date() + interval 6 DAY ;
 
 #View for today film
 CREATE VIEW film_day AS
-SELECT seances.seance_date, date_format(seances.seance_date,'%h-%m') AS seance_time,
-salles.salle_name,salles.nb_place,
+SELECT seances.seance_date, date_format(seances.seance_date,'%HH%i') AS seance_time,
+salles.salle_name,seances.nb_place,
 films.film_name,films.affiche_url,films.realease_date,films.duration,
 films.filmaker,films.genre 
 FROM seances 
@@ -144,16 +182,18 @@ INNER JOIN films ON seances.id_film = films.id_film
 WHERE date_format(seance_date,'%y-%m-%d') = current_date();
 
 #View all film from today to day + 6
-CREATE VIEW film_day_today_6 AS
-SELECT seances.seance_date,
-salles.salle_name,salles.nb_place,
+CREATE VIEW film_day_1_to_6 AS
+SELECT seances.seance_date, date_format(seances.seance_date,'%HH%i') AS seance_time,
+salles.salle_name,seances.nb_place, date_format(seances.seance_date,'%d-%m') AS seance_day,
 films.film_name,films.affiche_url,films.realease_date,films.duration,
 films.filmaker,films.genre 
 FROM seances 
 INNER JOIN salles ON seances.id_salle = salles.id_salle
 INNER JOIN films ON seances.id_film = films.id_film
 WHERE date_format(seance_date,'%y-%m-%d') <= current_date() + interval 6 day 
-AND date_format(seance_date,'%y-%m-%d') >= current_date();
+AND date_format(seance_date,'%y-%m-%d') >= current_date() + interval 1 day
+ORDER BY seance_day;
+
 
 #TEST VIEWS
 SELECT * FROM film_day; 
@@ -163,7 +203,7 @@ SELECT * FROM film_day3;
 SELECT * FROM film_day4;
 SELECT * FROM film_day5;
 SELECT * FROM film_day6;
-SELECT * FROM film_day_today_6;
+SELECT * FROM film_day_1_to_6;
 
 #PROCEDURE seance on interval
 DELIMITER |
@@ -196,13 +236,4 @@ DELIMITER ;
 #test procedure
 CALL first_last_seance_film(1);
 
-
-SELECT seances.seance_date, date_format(seances.seance_date,'%HH%mm') AS seance_time,
-salles.salle_name,salles.nb_place,
-films.film_name,films.affiche_url,films.realease_date,films.duration,
-films.filmaker,films.genre 
-FROM seances 
-INNER JOIN salles ON seances.id_salle = salles.id_salle
-INNER JOIN films ON seances.id_film = films.id_film
-WHERE date_format(seance_date,'%y-%m-%d') = current_date();
-
+#TRANSACTION
