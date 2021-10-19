@@ -15,6 +15,11 @@
     width: 85%;
   }
 }
+@media screen and (max-width: 1400px) {
+  .carousel-container1 {
+    width: 90%;
+  }
+}
 .carousel-container1 .carousel-inner1 {
   overflow: hidden;
 }
