@@ -1,19 +1,25 @@
 <link href="/css/carousel_otherday.css" rel="stylesheet" type="text/css">
 
-<h2 class="today1">Les séances des autres jours</h2>
+<h2 class="today1">Les séances de la semaine</h2>
 
 <div class="carousel-container1">
     <div class="carousel-inner1">
       <div class="track1">
-            <% for(var i = 0; i <data.length; i++){%> 
+            <% for(var i = 0; i <dataW.length; i++){%> 
                 <div class="card-container1">
                     <div class="card1 ">
-                        <div class="img1 " style="background-image:url('<%= data[i].affiche_url %>');background-size: cover;">
-                            <button type="button" class="btn btn-primary seance_time1"><%=data[i].seance_time%></button>
+                        <div class="img1 " style="background-image:url('<%= dataW[i].affiche_url %>');background-size: cover;">
+                            <button type="button" class="btn btn-primary seance_time1"><%=dataW[i].seance_time%></button>
                             <button type="button" class="btn btn-primary reserver1">RESERVER</button>
                         </div>
                         <div class="info1">
-                            <%= data[i].film_name %>
+                            <%= dataW[i].film_name %>
+                            <br/>
+                            <br/>
+                            <%= moment(dataW[i].seance_date).format('D MMMM') %>
+                            <br/>
+                            <br/>
+                            <span<% if(dataW[i].nb_place==0) {%> style="color:red" <%}else{%> style="color:green"<%}%> >place restante : <%= dataW[i].nb_place %> </span>
                         </div>
                     </div>
                 </div>
@@ -23,7 +29,7 @@
     <div class="nav1">
         <button class="prev1">
             <i class="material-icons">
-            keyboard_arrow_left
+              keyboard_arrow_left
             </i>
         </button>
         <button class="next1">
