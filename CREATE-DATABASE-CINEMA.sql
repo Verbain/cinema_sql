@@ -194,7 +194,6 @@ WHERE date_format(seance_date,'%y-%m-%d') <= current_date() + interval 6 day
 AND date_format(seance_date,'%y-%m-%d') >= current_date() + interval 1 day
 ORDER BY seance_day;
 
-
 #TEST VIEWS
 SELECT * FROM film_day; 
 SELECT * FROM film_day1;
@@ -237,3 +236,20 @@ DELIMITER ;
 CALL first_last_seance_film(1);
 
 #TRANSACTION
+DELIMITER |
+CREATE PROCEDURE transaction_reservation(IN IDseance INT,IN IDuser INT,IN quantity INT)
+BEGIN 
+	DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+    SET autocommit = 0;
+	START TRANSACTION;
+		UPDATE seances SET nb_place = (nb_place - quantity) WHERE id_seance = IDseance;
+		INSERT INTO reservation VALUE(null,IDseance,IDuser,quantity);
+	COMMIT WORK;
+END|
+DELIMITER ;
+
+DROP PROCEDURE transaction_reservation;
+#test transaction
+CALL transaction_reservation(1,3,2); #pas de reservation car seance complete
+CALL transaction_reservation(22,3,2); #reservation car seance avec place restante
+ 

@@ -7,6 +7,9 @@ const films = require('./src/controllers/filmsController')
 const navigationController = require('./src/controllers/navigationController');
 const usersController = require('./src/controllers/usersController');
 const seancesController = require('./src/controllers/seancesController');
+const filmsController = require('./src/controllers/filmsController');
+const sallesController = require('./src/controllers/sallesController');
+const reservationsController = require('./src/controllers/reservationsController');
 
 const urlEncodedParser = bodyParser.urlencoded({extended : false})
 
@@ -28,6 +31,8 @@ app.get('/inscription',navigationController.inscription)
 app.get('/login',navigationController.login)
 app.get('/logout',navigationController.logout)
 app.get('/seance',navigationController.seance)
+app.get('/film',navigationController.film)
+app.get('/salle',navigationController.salle)
 //NEW USER
 app.post('/api/newUser',urlEncodedParser,usersController.createUser)
 app.post('/api/login',urlEncodedParser,usersController.login)
@@ -35,6 +40,14 @@ app.post('/api/login',urlEncodedParser,usersController.login)
 //NEW SEANCE
 app.post('/api/seance',urlEncodedParser,seancesController.createSeance)
 
+//NEW FILM
+app.post('/api/film',urlEncodedParser,filmsController.createFilm)
+
+//NEW SALLE
+app.post('/api/salle',urlEncodedParser,sallesController.createSalle)
+
+//NEW RESERVATION
+app.post('/api/reservation',urlEncodedParser,reservationsController.createReservation)
 app.listen(3000,function(){
     console.log("app listening on port 3000")
 })

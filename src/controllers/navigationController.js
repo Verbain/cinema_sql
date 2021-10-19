@@ -32,6 +32,16 @@ class navigationController{
         })
         
     }
+    film(req,res){
+        const session = req.session;
+        db.select().table('salles').then(dataS=>{
+            res.render('filmForm',{dataS,session})
+        })
+    }
+    salle(req,res){
+        const session = req.session;
+        res.render('salleForm',{session})
+    }
     
 }
 

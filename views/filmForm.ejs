@@ -1,0 +1,52 @@
+<%- include('./header.ejs') %> 
+
+   <form action="/api/film" autocomplete="off" method="POST">
+        <div class="mb-3">
+            <label for="InputFilmname" class="form-label">Name</label>
+            <input type="text" name="film_name" class="form-control" id="InputFilmname" >
+        </div>
+        <div class="mb-3">
+            <label for="InputAfficheurl" class="form-label">affiche url</label>
+            <input type="text" name="affiche_url"class="form-control" id="InputAfficheurl" >
+        </div>
+        <div class="mb-3">
+                <label for="InputDuration" class="form-label">duration (in minute)</label>
+                <input type="text" name="duration"class="form-control" id="InputDuration" >          
+        </div>
+        <div class="mb-3">
+                <label for="InputFilmaker" class="form-label">Movie maker</label>
+                <input type="text" name="filmaker"class="form-control" id="InputFilmaker" >
+        </div>
+        <div class="mb-3">
+                <label for="InputRealeasedate" class="form-label">realease date</label>
+                <input type="text" name="realease_date" class="form-control" id="datepick">
+        </div>
+        <div class="mb-3">
+            <select name="genre" class="form-control" id="InputGenre">
+                <option value="Fantastique" >Fantastique</option>
+                <option value="Horreur" >Horreur</option>
+                <option value="Drame" >Drame</option>
+                <option value="Comedie" >Comedie</option>
+                <option value="Romantique" >Romantique</option>
+            </select>
+        </div>
+        <select name="id_salle" class="form-control" id="InputSalle">
+            <% for(var i = 0; i <dataS.length; i++){%>
+            <option value="<%=dataS[i].id_salle%>" ><%= dataS[i].salle_name%></option>
+            <%}%>
+        </select>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+    <script>
+        $(document).ready(function(){
+            $(function () {
+              $('#datepick').datepicker({
+                  dateFormat:"yyyy-mm-dd"
+              });
+              $('#datepick').datepicker("option","dateFormat",("yy-mm-dd"));
+            });   
+          });
+    </script>
+    
+<%- include('./footer.ejs') %>
