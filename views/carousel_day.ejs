@@ -16,7 +16,7 @@
                             <%= data[i].film_name %>
                             <br/>
                             <br/>
-                            <span<% if(data[i].nb_place==0) {%> style="color:red" <%}%> >place restante : <%= data[i].nb_place %> </span>
+                            <span<% if(data[i].nb_place==0) {%> style="color:red" <%}else{%> style="color:green"<%}%> >place restante : <%= data[i].nb_place %> </span>
                         </div>
                     </div>
                 </div>

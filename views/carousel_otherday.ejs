@@ -9,14 +9,12 @@
                 <div class="card-container1">
                     <div class="card1 ">
                         <div class="img1 " style="background-image:url('<%= dataW[i].affiche_url %>');background-size: cover;">
+                          <button type="button" class="btn btn-primary seance_date1"><%= moment(dataW[i].seance_date).format('D MMMM') %></button>
                             <button type="button" class="btn btn-primary seance_time1"><%=dataW[i].seance_time%></button>
                             <button type="button" class="btn btn-primary reserver1">RESERVER</button>
                         </div>
                         <div class="info1">
                             <%= dataW[i].film_name %>
-                            <br/>
-                            <br/>
-                            <%= moment(dataW[i].seance_date).format('D MMMM') %>
                             <br/>
                             <br/>
                             <span<% if(dataW[i].nb_place==0) {%> style="color:red" <%}else{%> style="color:green"<%}%> >place restante : <%= dataW[i].nb_place %> </span>

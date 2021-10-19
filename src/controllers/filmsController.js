@@ -5,12 +5,7 @@ class filmsController{
     async createFilm(req,res){
         try{
             const id = await filmsService.createFilm(req.body);
-            res.status(201).json({
-                id:id,
-                status:201,
-                response:'New film created',
-                data:req.body
-            });
+            res.redirect('http://localhost:3000')
         }catch(err) {
             console.log(err);
         }
