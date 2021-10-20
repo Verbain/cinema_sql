@@ -9,9 +9,9 @@
                 <div class="card-container1">
                     <div class="card1 ">
                         <div class="img1 " style="background-image:url('<%= dataW[i].affiche_url %>');background-size: cover;">
-                          <button type="button" class="btn btn-primary seance_date1"><%= moment(dataW[i].seance_date).format('D MMMM') %></button>
-                            <button type="button" class="btn btn-primary seance_time1"><%=dataW[i].seance_time%></button>
-                            <button type="button" class="btn btn-primary reserver1">RESERVER</button>
+                          <% if(session.user_id){%><a class ="reserver1" href='/reservation/<%= dataW[i].id_seance %>'><button type="button" class="btn btn-primary">RESERVER</button></a><%}%> </a>
+                          <a class="seance_date1" href=''><button type="button" class="btn btn-primary"><%= moment(dataW[i].seance_date).format('D MMMM') %></button>
+                          <a class ="seance_time1" href=''><button type="button" class="btn btn-primary"><%=dataW[i].seance_time%></button></a>
                         </div>
                         <div class="info1">
                             <%= dataW[i].film_name %>

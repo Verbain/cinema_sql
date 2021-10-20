@@ -27,7 +27,7 @@ class navigationController{
         const session = req.session
         db.select().table('hours').then(dataH =>{
             db.select().table('films').then(dataF =>{
-                res.render('reservation',{dataH,dataF,session})
+                res.render('seanceForm',{dataH,dataF,session})
             })
         })
         
@@ -41,6 +41,11 @@ class navigationController{
     salle(req,res){
         const session = req.session;
         res.render('salleForm',{session})
+    }
+    reservation(req,res){
+        const session = req.session;
+        const IDseance = req.params.IDseance;
+        res.render('reservationForm',{session,IDseance})
     }
     
 }

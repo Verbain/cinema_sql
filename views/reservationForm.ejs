@@ -1,0 +1,22 @@
+<%- include('./header.ejs') %> 
+
+   <form action="/api/reservation" autocomplete="off" method="POST">
+        <div class="mb-3">
+            <label for="InputIdseance" class="form-label">IDseance</label>
+            <input type="text" name="IDseance" class="form-control" id="InputIdseance" value="<%=IDseance%>" >
+        <div class="mb-3">
+            <div class="mb-3">
+                <label for="InputIduser" class="form-label">IDuser</label>
+                <input type="text" name="IDuser" class="form-control" id="InputIduser" value="<%= session.user_id %>" >
+            <div class="mb-3">
+                <label for="InputDate" class="form-label">select quantity</label>
+                <select name="quantity" class="form-control" id="InputQuantity">
+                    <option value="1" >1</option>
+                    <option value="2" >2</option>
+                    <option value="3" >3</option>
+                    <option value="4" >4</option>
+                </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+<%- include('./footer.ejs') %>

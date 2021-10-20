@@ -121,10 +121,17 @@
 
 }
 .reserver{
-    margin-right: 17%;
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
 }
 .seance_time{
-    margin-right: 29%;
+  display: flex;
+  justify-content: center;
+  text-decoration: none;
+}
+.seance_time .btn-primary{
+  display: block;
 }
 
 .today{

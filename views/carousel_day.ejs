@@ -9,8 +9,8 @@
                 <div class="card-container">
                     <div class="card ">
                         <div class="img " style="background-image:url('<%= data[i].affiche_url %>');background-size: cover;">
-                            <button type="button" class="btn btn-primary seance_time"><%=data[i].seance_time%></button>
-                            <button type="button" class="btn btn-primary reserver">RESERVER</button>
+                          <% if(session.user_id){%><a class ="reserver" href='/reservation/<%= data[i].id_seance %>'><button type="button" class="btn btn-primary">RESERVER</button></a><%}%>
+                            <a class="seance_time" href=""><button type="button" class="btn btn-primary"><%=data[i].seance_time%></button></a>
                         </div>
                         <div class="info">
                             <%= data[i].film_name %>
