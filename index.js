@@ -33,6 +33,7 @@ app.get('/logout',navigationController.logout)
 app.get('/seance',navigationController.seance)
 app.get('/film',navigationController.film)
 app.get('/salle',navigationController.salle)
+app.get('/reservation/:IDseance',navigationController.reservation)
 //NEW USER
 app.post('/api/newUser',urlEncodedParser,usersController.createUser)
 app.post('/api/login',urlEncodedParser,usersController.login)
@@ -48,6 +49,8 @@ app.post('/api/salle',urlEncodedParser,sallesController.createSalle)
 
 //NEW RESERVATION
 app.post('/api/reservation',urlEncodedParser,reservationsController.createReservation)
+
+
 app.listen(3000,function(){
     console.log("app listening on port 3000")
 })

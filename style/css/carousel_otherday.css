@@ -120,13 +120,25 @@
 
 }
 .reserver1{
-    margin-right: 17%;
+  display: flex;
+  justify-content: center;
+  text-decoration: none;
 }
 .seance_time1{
-    margin-right: 29%;
+display: flex;
+justify-content: center;
+text-decoration: none;
 }
 .seance_date1{
-  margin-right: 17%;
+  display: flex;
+  justify-content: center;
+  text-decoration: none;
+}
+.seance_time1 .btn-primary{
+  display: block;
+}
+.seance_date1 .btn-primary{
+  display: block;
 }
 
 .today1{
