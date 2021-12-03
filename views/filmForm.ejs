@@ -1,21 +1,26 @@
 <%- include('./header.ejs') %> 
-
-   <form action="/api/film" autocomplete="off" method="POST">
+   <form <%if (update == 1){%> action='/api/update/film' <%}else{%>action="/api/film"<%}%> autocomplete="off" method="POST">
+    <%if (update ==1){%> 
+        <div class="mb-3" hidden>
+            <label for="Inputid" class="form-label">id_film</label>
+            <input type="text" value="<%=dataU.id_film%>" name="id" class="form-control" id="Inputid" >
+        </div>
+    <%}%>
         <div class="mb-3">
             <label for="InputFilmname" class="form-label">Name</label>
-            <input type="text" name="film_name" class="form-control" id="InputFilmname" >
+            <input type="text" <%if (update ==1){%> value="<%=dataU.film_name%>"<%}%> name="film_name" class="form-control" id="InputFilmname" >
         </div>
         <div class="mb-3">
             <label for="InputAfficheurl" class="form-label">affiche url</label>
-            <input type="text" name="affiche_url"class="form-control" id="InputAfficheurl" >
+            <input type="text" <%if (update ==1){%> value="<%=dataU.affiche_url%>"<%}%> name="affiche_url"class="form-control" id="InputAfficheurl" >
         </div>
         <div class="mb-3">
                 <label for="InputDuration" class="form-label">duration (in minute)</label>
-                <input type="text" name="duration"class="form-control" id="InputDuration" >          
+                <input type="text" <%if (update ==1){%> value="<%=dataU.duration%>"<%}%> name="duration"class="form-control" id="InputDuration" >          
         </div>
         <div class="mb-3">
                 <label for="InputFilmaker" class="form-label">Movie maker</label>
-                <input type="text" name="filmaker"class="form-control" id="InputFilmaker" >
+                <input type="text" <%if (update ==1){%> value="<%=dataU.filmaker%>"<%}%> name="filmaker"class="form-control" id="InputFilmaker" >
         </div>
         <div class="mb-3">
                 <label for="InputRealeasedate" class="form-label">realease date</label>
@@ -23,16 +28,16 @@
         </div>
         <div class="mb-3">
             <select name="genre" class="form-control" id="InputGenre">
-                <option value="Fantastique" >Fantastique</option>
-                <option value="Horreur" >Horreur</option>
-                <option value="Drame" >Drame</option>
-                <option value="Comedie" >Comedie</option>
-                <option value="Romantique" >Romantique</option>
+                <option <%if (update ==1){ if(dataU.genre == "Fantastique"){%>selected<%}}%> value="Fantastique" >Fantastique</option>
+                <option <%if (update ==1){ if(dataU.genre == "Horreur"){%>selected<%}}%> value="Horreur" >Horreur</option>
+                <option <%if (update ==1){ if(dataU.genre == "Drame"){%>selected<%}}%> value="Drame" >Drame</option>
+                <option <%if (update ==1){ if(dataU.genre == "Comedie"){%>selected<%}}%> value="Comedie" >Comedie</option>
+                <option <%if (update ==1){ if(dataU.genre == "Romantique"){%>selected<%}}%> value="Romantique" >Romantique</option>
             </select>
         </div>
         <select name="id_salle" class="form-control" id="InputSalle">
             <% for(var i = 0; i <dataS.length; i++){%>
-            <option value="<%=dataS[i].id_salle%>" ><%= dataS[i].salle_name%></option>
+            <option <%if (update ==1){ if(dataU.id_salle == dataS[i].id_salle){%>selected<%}}%> value="<%=dataS[i].id_salle%>" ><%= dataS[i].salle_name%></option>
             <%}%>
         </select>
         <button type="submit" class="btn btn-primary">Submit</button>
@@ -40,11 +45,17 @@
 
     <script>
         $(document).ready(function(){
+            '<% if(update == 1){ %>'
+                var myDate = '<%- myDate %>'
+            '<%}%>'
             $(function () {
               $('#datepick').datepicker({
-                  dateFormat:"yyyy-mm-dd"
+                  dateFormat:"yyyy-mm-dd",
               });
               $('#datepick').datepicker("option","dateFormat",("yy-mm-dd"));
+              '<% if(update == 1){ %>'
+                $('#datepick').datepicker("setDate",myDate)
+              '<%}%>'
             });   
           });
     </script>

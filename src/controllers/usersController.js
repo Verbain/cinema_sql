@@ -33,5 +33,23 @@ class usersController{
             console.log(err);
         }
     }
+    async updateUser(req,res){
+        try {
+            const id = await usersService.updateUser(req.body);
+            res.redirect('/')
+        } catch (err){
+            console.log(err);
+        }
+    }
+    async deleteUser(req, res,id){
+        id = req.params.ID
+        try {
+            await db('users').where({id_user : id}).del().then((ret) =>{
+                res.redirect('/')
+            })
+        } catch (err){
+            console.log(err);
+        }
+    }
 }
 module.exports = new usersController();

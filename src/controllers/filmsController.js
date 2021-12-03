@@ -5,8 +5,27 @@ class filmsController{
     async createFilm(req,res){
         try{
             const id = await filmsService.createFilm(req.body);
-            res.redirect('http://localhost:3000')
+            res.redirect('/')
         }catch(err) {
+            console.log(err);
+        }
+    }
+    async updateFilm(req,res){
+        console.log(req.body)
+        try {
+            const id = await filmsService.updateFilm(req.body);
+            res.redirect('/')
+        } catch (err){
+            console.log(err);
+        }
+    }
+    async deleteFilm(req, res,id){
+        id = req.params.ID
+        try {
+            await db('films').where({id_film : id}).del().then((ret) =>{
+                res.redirect('/')
+            })
+        } catch (err){
             console.log(err);
         }
     }

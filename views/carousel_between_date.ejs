@@ -1,6 +1,17 @@
+<%- include('./header.ejs') %> 
 <link href="/css/carousel.css" rel="stylesheet" type="text/css">
 
 <h2 class="today">Les séances du jour</h2>
+
+  <div class="mb-3">
+    <label for="InputRealeasedate" class="form-label">realease date</label>
+    <input type="text" name="realease_date" class="form-control" id="datepickStart">
+  </div>
+
+  <div class="mb-3">
+    <label for="InputRealeasedate" class="form-label">realease date</label>
+    <input type="text" name="realease_date" class="form-control" id="datepickEnd">
+  </div>
 
 <div class="carousel-container">
     <div class="carousel-inner">
@@ -71,3 +82,52 @@ prev.addEventListener('click', () => {
   track.style.transform = `translateX(-${index * carouselWidth}px)`;
 })
 </script>
+
+<script>
+  $(document).ready(function(){
+      $(function () {
+        $('#datepickStart').datepicker({
+            dateFormat:"yyyy-mm-dd",
+            onSelect: function(dateText){
+              $(this).change();
+            }
+        }).change(function (){
+          var myUrl = window.location.href.split('/')
+          console.log(myUrl);
+          console.log(window.location.href.split('/')[4])
+          myUrl[4] = this.value
+          var myUpatedUrl = myUrl
+          console.log(myUpatedUrl)
+          console.log("my value:" + this.value);
+          myNewUrl = "http://"+myUpatedUrl[2]+"/"+myUpatedUrl[3]+"/"+myUpatedUrl[4]+"/"+myUpatedUrl[5];
+          window.location = myNewUrl;
+        });
+        $('#datepickStart').datepicker("option","dateFormat",("yy-mm-dd"));
+      });   
+    });
+</script>
+<script>
+  $(document).ready(function(){
+      $(function () {
+        $('#datepickEnd').datepicker({
+            dateFormat:"yyyy-mm-dd",
+            onSelect: function(dateText){
+              $(this).change();
+            }
+        }).change(function (){
+          var myUrl = window.location.href.split('/')
+          console.log(myUrl);
+          console.log(window.location.href.split('/')[5])
+          myUrl[5] = this.value
+          var myUpatedUrl = myUrl
+          console.log(myUpatedUrl)
+          console.log("my value:" + this.value);
+          myNewUrl = "http://"+myUpatedUrl[2]+"/"+myUpatedUrl[3]+"/"+myUpatedUrl[4]+"/"+myUpatedUrl[5];
+          window.location = myNewUrl;
+        });
+        $('#datepickEnd').datepicker("option","dateFormat",("yy-mm-dd"));
+      });   
+    });
+</script>
+
+<%- include('./footer.ejs') %>

@@ -174,19 +174,18 @@ WHERE date_format(seance_date,'%y-%m-%d') = current_date() + interval 6 DAY ;
 CREATE VIEW film_day AS
 SELECT seances.seance_date, date_format(seances.seance_date,'%HH%i') AS seance_time,
 salles.salle_name,seances.nb_place,
-films.film_name,films.affiche_url,films.realease_date,films.duration,
-films.filmaker,films.genre 
+films.film_name,films.affiche_url,films.realease_date,films.duration,films.id_film,
+films.filmaker,films.genre,seances.id_seance
 FROM seances 
 INNER JOIN salles ON seances.id_salle = salles.id_salle
 INNER JOIN films ON seances.id_film = films.id_film
 WHERE date_format(seance_date,'%y-%m-%d') = current_date();
-
-#View all film from today to day + 6
+#View all film from day+1 to day + 6
 CREATE VIEW film_day_1_to_6 AS
 SELECT seances.seance_date, date_format(seances.seance_date,'%HH%i') AS seance_time,
 salles.salle_name,seances.nb_place, date_format(seances.seance_date,'%d-%m') AS seance_day,
-films.film_name,films.affiche_url,films.realease_date,films.duration,
-films.filmaker,films.genre 
+films.film_name,films.affiche_url,films.realease_date,films.duration,films.id_film,
+films.filmaker,films.genre,seances.id_seance 
 FROM seances 
 INNER JOIN salles ON seances.id_salle = salles.id_salle
 INNER JOIN films ON seances.id_film = films.id_film
@@ -194,6 +193,16 @@ WHERE date_format(seance_date,'%y-%m-%d') <= current_date() + interval 6 day
 AND date_format(seance_date,'%y-%m-%d') >= current_date() + interval 1 day
 ORDER BY seance_day;
 
+#View for seance information
+CREATE VIEW seance_information AS
+SELECT seances.seance_date, date_format(seances.seance_date,'%HH%i') AS seance_time,
+salles.salle_name,seances.nb_place, date_format(seances.seance_date,'%d-%m') AS seance_day,
+films.film_name,films.affiche_url,films.realease_date,films.duration,
+films.filmaker,films.genre,seances.id_seance 
+FROM seances 
+INNER JOIN salles ON seances.id_salle = salles.id_salle
+INNER JOIN films ON seances.id_film = films.id_film
+ORDER BY seance_day;
 #TEST VIEWS
 SELECT * FROM film_day; 
 SELECT * FROM film_day1;
@@ -203,24 +212,26 @@ SELECT * FROM film_day4;
 SELECT * FROM film_day5;
 SELECT * FROM film_day6;
 SELECT * FROM film_day_1_to_6;
+SELECT * FROM seance_information;
 
 #PROCEDURE seance on interval
 DELIMITER |
 CREATE PROCEDURE film_on_interval (IN date_start date, IN date_end date)
 BEGIN
-    SELECT seances.seance_date,
-	salles.salle_name,salles.nb_place,
-	films.film_name,films.affiche_url,films.realease_date,films.duration,
-	films.filmaker,films.genre 
-	FROM seances 
-	INNER JOIN salles ON seances.id_salle = salles.id_salle
-	INNER JOIN films ON seances.id_film = films.id_film
+SELECT seances.seance_date, date_format(seances.seance_date,'%HH%i') AS seance_time,
+salles.salle_name,seances.nb_place, date_format(seances.seance_date,'%d-%m') AS seance_day,
+films.film_name,films.affiche_url,films.realease_date,films.duration,films.id_film,
+films.filmaker,films.genre,seances.id_seance 
+FROM seances 
+INNER JOIN salles ON seances.id_salle = salles.id_salle
+INNER JOIN films ON seances.id_film = films.id_film
 	WHERE date_format(seance_date,'%y-%m-%d') <= date_end
 	AND date_format(seance_date,'%y-%m-%d') >= date_start;
 END |
 DELIMITER ;
 #Test procedure
-CALL film_on_interval('2021-09-29','2021-10-10');
+
+CALL film_on_interval('2021-11-18','2021-11-20');
 
 #PROCEDURE get first and last seance of moovie
 DELIMITER |
@@ -245,11 +256,8 @@ BEGIN
 		UPDATE seances SET nb_place = (nb_place - quantity) WHERE id_seance = IDseance;
 		INSERT INTO reservation VALUE(null,IDseance,IDuser,quantity);
 	COMMIT WORK;
+    SET autocommit = 1;
 END|
 DELIMITER ;
 
-DROP PROCEDURE transaction_reservation;
-#test transaction
-CALL transaction_reservation(1,3,2); #pas de reservation car seance complete
-CALL transaction_reservation(22,3,2); #reservation car seance avec place restante
  

@@ -24,6 +24,18 @@ class usersDAO{
             return 404;
         }
     }
+    async updateUser(id,Firstname,Lastname,Email,Phone,Birthdate,Password,Role){
+        const [ret] = await db('salles').where({id_user: id}).update({
+            first_name:Firstname,
+            last_name:Lastname,
+            email:Email,
+            phone:Phone,
+            birthdate:Birthdate,
+            password:Password,
+            role:Role
+        }).returning('id');
+        return ret;
+    }
 }
 
 module.exports = new usersDAO();

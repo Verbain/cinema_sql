@@ -1,0 +1,12 @@
+<%- include('./header.ejs') %>
+    <h1>LISTE DES UTILISATEURS</h1>
+    <ul>
+        <% for(var i = 0; i <data.length; i++){%>
+        <li>
+            <a>FIRST_NAME : <%= data[i].first_name %></a>  
+            <a href="/formDish/<%=data[i].id%>"><button class="btn btn-primary">update</button></a>
+            <a href="/api/delete/user/<%=data[i].id_user%>"><i>&#10060;</i></a>
+        </li>
+        <%}%>
+    </ul>
+<%- include('./footer.ejs') %>

@@ -1,0 +1,23 @@
+<%- include('./header.ejs') %> 
+
+   <form action="/api/newUser" autocomplete="off" method="POST">
+        <label for="films">select films</label>
+        <select name="sFilm" class="form-control" id="films">
+            <% for(var i = 0; i <dataF.length; i++){%>
+            <option <if(dataS.id_film == dataF[i].id_film){%>selected<%}%>value="<%=dataF[i].id_film%>" ><%= dataF[i].film_name%></option>
+            <%}%>
+        </select>
+        <label for="InputSeancedate" class="form-label">Select Seance Date</label>
+        <input type="text" name="Seancedate" class="form-control" id="datepickS--">
+        <div class="container1">
+            <div>
+                <label for="InputDate" class="form-label">select hours</label>
+                <select name="sDate" class="form-control" id="Date">
+                    <% for(var i = 0; i <dataH.length; i++){%>
+                    <option <if(dataS.id_film == dataF[i].id_film){%>selected<%}%>value="<%=dataH[i].hours%>" ><%= dataH[i].hours%></option>
+                    <%}%>
+                </select>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>

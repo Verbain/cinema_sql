@@ -1,0 +1,13 @@
+<%- include('./header.ejs') %>
+    <h1>LISTE DES FILMS</h1>
+    <ul>
+        <% for(var i = 0; i <data.length; i++){%>
+        <li>
+            <a>FILM : <%= data[i].film_name %></a>
+            <a href="/filminfo/<%=data[i].id_film%>"><button class="btn btn-primary">film info</button></a>  
+            <a href="/film/<%=data[i].id_film%>"><button class="btn btn-primary">update</button></a>
+            <a href="/api/delete/film/<%=data[i].id_film%>"><i>&#10060;</i></a>
+        </li>
+        <%}%>
+    </ul>
+<%- include('./footer.ejs') %>

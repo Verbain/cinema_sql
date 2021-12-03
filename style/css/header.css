@@ -25,3 +25,11 @@ body{
 div.ui-datepicker{
     font-size:10px;
 }
+.center{
+    display: flex;
+    justify-content:  center;
+}
+.center-title{
+    display: flex;
+    justify-content: center;
+}

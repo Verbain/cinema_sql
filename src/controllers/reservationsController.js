@@ -7,7 +7,6 @@ class reservationsController{
 
             db.select().table('seances').where({id_seance : req.body.IDseance}).first().then(async (data)=>{
                 let verification = data.nb_place - req.body.quantity
-
                 if(verification < 0 ){
                     console.log('reservation impossible') 
                 } else {
