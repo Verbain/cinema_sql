@@ -11,7 +11,6 @@ class filmsController{
         }
     }
     async updateFilm(req,res){
-        console.log(req.body)
         try {
             const id = await filmsService.updateFilm(req.body);
             res.redirect('/')

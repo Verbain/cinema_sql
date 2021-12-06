@@ -41,6 +41,7 @@ app.get('/listSeances',navigationController.listSeances)
 app.get('/listSalles',navigationController.listSalles)
 app.get('/listUsers',navigationController.listUsers)
 app.get('/filmInfo/:filmID',navigationController.filmInformation)
+app.get('/succesReservation',navigationController.reservationSucces)
 //NEW USER
 app.post('/api/newUser',urlEncodedParser,usersController.createUser)
 app.post('/api/login',urlEncodedParser,usersController.login)

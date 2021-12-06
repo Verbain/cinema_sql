@@ -17,7 +17,6 @@ class usersDAO{
     }
     async login(Firstname,Password){
         const user = await db('users').first().where({first_name:Firstname,password:Password});
-        console.log(user)
         if(user){
             return user;
         } else {

@@ -21,7 +21,6 @@ class usersController{
             if (log!=404){
                 req.session.role = log.role
                 req.session.user_id = log.id_user
-                console.log(req.session)
                 res.redirect('/')
                 } else {
                     res.status(201).json({

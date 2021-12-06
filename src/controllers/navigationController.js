@@ -6,7 +6,6 @@ class navigationController{
         const session = req.session
         db.select().table('film_day_1_to_6').then(dataW =>{
             db.select().table('film_day').then(data => {
-                console.log(data)
                 res.render('home',{data,dataW,session,moment})
             })
         })   
@@ -15,7 +14,6 @@ class navigationController{
         const session = req.session
         const startD = req.params.startD
         const endD = req.params.endD
-        console.log("start date : " + startD + "end date : " + endD)
             db.raw('CALL film_on_interval(?,?)',[startD,endD]).then(data => {
                 data = data[0][0]
                 res.render('carousel_between_date',{data,session})
@@ -52,7 +50,6 @@ class navigationController{
                 db.select().table('salles').then(dataS=>{
                     const dateUpdate = dataU.realease_date
                     const myDate = dateUpdate.toISOString().split('T')[0]
-                    console.log(myDate)
                     res.render('filmForm',{dataS,dataU,session,update,myDate})
                 })
             })
@@ -103,6 +100,10 @@ class navigationController{
         db.select().table('films').where({id_film : film_id}).first().then(data =>{
             res.render('filmInfo',{session,data})
         })
+    }
+    async reservationSucces(req,res){
+        const session = req.session;
+        res.render('reservationSucces',{session})
     }
     /*
     updateSeances(req,res,id_seance){
