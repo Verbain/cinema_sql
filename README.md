@@ -7,6 +7,13 @@ Projet de gestion d'un cinéma en nodeJS et MySQL
 ## Clone du projet
 Afin de clôner le projet 
 > $git clone https://github.com/Verbain/cinema_sql.git
+>
+> ce déplacer dans le fichier clôner
+>
+> $npm install
+>
+> $npm start
+
 
 ## Setup le projet pour une utilisation locale
 Afin d'éxécuter le projet en locale certain fichier sont à éditer ou crée
