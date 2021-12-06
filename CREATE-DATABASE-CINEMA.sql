@@ -110,11 +110,11 @@ SET @max_quantity_salle_2 := 20;
 SET @max_quantity_salle_3 := 2;
 
 /*test insert seances et default credentials pour user et admin*/
-INSERT INTO seances VALUE(null,1,1,'2021-09-30 16:00:00');
-INSERT INTO seances VALUE(null,1,1,'2021-10-01 16:00:00');
-INSERT INTO seances VALUE(null,1,1,'2021-10-03 16:00:00');
-INSERT INTO seances VALUE(null,1,1,'2021-10-02 16:00:00');
-INSERT INTO seances VALUE(null,1,1,'2021-10-15 16:00:00');
+INSERT INTO seances VALUE(null,1,1,'2021-09-30 16:00:00','35');
+INSERT INTO seances VALUE(null,1,1,'2021-10-01 16:00:00','35');
+INSERT INTO seances VALUE(null,1,1,'2021-10-03 16:00:00','35');
+INSERT INTO seances VALUE(null,1,1,'2021-10-02 16:00:00','35');
+INSERT INTO seances VALUE(null,1,1,'2021-10-15 16:00:00','35');
 
 insert into users values(null,'admin','admin','admin@gmail.com','0613946470','1997-09-29','admin','admin');
 insert into users values(null,'user','user','user@gmail.com','0613946470','1997-09-29','user','user');
