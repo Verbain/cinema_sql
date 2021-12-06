@@ -1,0 +1,64 @@
+<%- include('./header.ejs') %>
+<button class="add_form_field">Add New Field &nbsp; 
+    <span style="font-size:16px; font-weight:bold;">+ </span>
+</button>
+<form autocomplete="off" action="/api/seance" method="POST">
+    <label for="films">select films</label>
+    <select name="sFilm" class="form-control" id="films">
+        <% for(var i = 0; i <dataF.length; i++){%>
+        <option value="<%=dataF[i].id_film%>" ><%= dataF[i].film_name%></option>
+        <%}%>
+    </select>
+    <label for="InputSeancedate" class="form-label">Select Seance Date</label>
+    <input type="text" name="Seancedate" class="form-control" id="datepickS">
+    <div class="container1">
+        <div>
+            <label for="InputDate" class="form-label">select hours</label>
+            <select name="sDate" class="form-control" id="Date">
+                <% for(var i = 0; i <dataH.length; i++){%>
+                <option value="<%=dataH[i].hours%>" ><%= dataH[i].hours%></option>
+                <%}%>
+            </select>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<%- include('./footer.ejs') %>
+
+<script>
+    $(document).ready(function() {
+    var max_fields = 20;
+    var wrapper = $(".container1");
+    var add_button = $(".add_form_field");
+    var x = 1;
+    $(add_button).click(function(e) {
+        e.preventDefault();
+        if (x < max_fields) {
+            x++;
+            $(wrapper).append(`<div>
+                                    <label for="InputDate" class="form-label">select hours</label>
+                                    <select name="sDate" class="form-control" id="Date">
+                                        <% for(var i = 0; i <dataH.length; i++){%>
+                                        <option value="<%=dataH[i].hours%>" ><%= dataH[i].hours%></option>
+                                        <%}%>
+                                    </select>
+                            </div>`); //add input box
+        } else {
+            alert('You Reached the limits')
+        }
+    });
+    $(wrapper).on("click", ".delete", function(e) {
+        e.preventDefault();
+        $(this).parent('div').remove();
+        x--;
+    })
+$(function () {
+        $('#datepickS').datepicker({
+            dateFormat:"yyyy-mm-dd"
+        });
+        $('#datepickS').datepicker("option","dateFormat",("yy-mm-dd"));
+    });
+});
+
+</script>

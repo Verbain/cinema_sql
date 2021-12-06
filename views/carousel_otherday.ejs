@@ -1,0 +1,74 @@
+<link href="/css/carousel_otherday.css" rel="stylesheet" type="text/css">
+
+<h2 class="today1">Les séances de la semaine</h2>
+
+<div class="carousel-container1">
+    <div class="carousel-inner1">
+      <div class="track1">
+            <% for(var i = 0; i <dataW.length; i++){%> 
+                <div class="card-container1">
+                    <div class="card1 ">
+                        <div class="img1 " style="background-image:url('<%= dataW[i].affiche_url %>');background-size: cover;">
+                          <% if(session.user_id){%><a class ="reserver1" href='/reservation/<%= dataW[i].id_seance %>'><button type="button" class="btn btn-primary">RESERVER</button></a><%}%> </a>
+                          <a class="seance_date1" href=''><button type="button" class="btn btn-primary"><%= moment(dataW[i].seance_date).format('D MMMM') %></button>
+                          <a class ="seance_time1" href=''><button type="button" class="btn btn-primary"><%=dataW[i].seance_time%></button></a>
+                        </div>
+                        <div class="info1">
+                            <%= dataW[i].film_name %>
+                            <br/>
+                            <a href='/filminfo/<%=dataW[i].id_film%>'>film info</a>
+                            <br/>
+                            <span<% if(dataW[i].nb_place==0) {%> style="color:red" <%}else{%> style="color:green"<%}%> >place restante : <%= dataW[i].nb_place %> </span>
+                        </div>
+                    </div>
+                </div>
+            <%}%>
+        </div>
+    </div>
+    <div class="nav1">
+        <button class="prev1">
+            <i class="material-icons">
+              keyboard_arrow_left
+            </i>
+        </button>
+        <button class="next1">
+            <i class="material-icons">
+            keyboard_arrow_right
+            </i>
+        </button>
+    </div>
+</div>
+
+<script>
+const prev1  = document.querySelector('.prev1');
+const next1 = document.querySelector('.next1');
+
+const track1 = document.querySelector('.track1');
+
+let carouselWidth1 = document.querySelector('.carousel-container1').offsetWidth;
+
+window.addEventListener('resize', () => {
+  carouselWidth1 = document.querySelector('.carousel-container1').offsetWidth;
+})
+
+let index1 = 0;
+
+next1.addEventListener('click', () => {
+  index1++;
+  prev1.classList.add('show1');
+  track1.style.transform = `translateX(-${index1 * carouselWidth1}px)`;
+  
+  if (track1.offsetWidth - (index1 * carouselWidth1) < carouselWidth1) {
+    next1.classList.add('hide1');
+  }
+})
+
+prev1.addEventListener('click', () => {
+  index1--;
+  next1.classList.remove('hide1');
+  if (index1 === 0) {
+    prev1.classList.remove('show1');
+  }
+  track1.style.transform = `translateX(-${index1 * carouselWidth1}px)`;
+})
+</script>
