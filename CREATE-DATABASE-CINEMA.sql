@@ -1,7 +1,7 @@
 CREATE DATABASE cinema;
 USE cinema;
 /*utiliser pour autoriser les connexions du back use ur db password*/
-ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'vanille95370';
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'myDatabasePassword';
 FLUSH privileges;
 
 /* salles tables + insert salles par défault du brief */
