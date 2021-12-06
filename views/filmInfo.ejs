@@ -1,0 +1,13 @@
+<%- include('./header.ejs') %>
+<h1 class="center-title"> FICHE DU FILM <%= data.film_name %></h1>
+<div class="center">
+<ul>
+    <img src="<%= data.affiche_url %>">
+    <li>nom : <%= data.film_name %></li>
+    <li>date de sortie : <%= data.realease_date %></li>
+    <li>durée (en minute): <%= data.duration %></li>
+    <li>réalisateur : <%= data.filmaker %></li>
+    <li>genre : <%= data.genre %></li>
+</ul> 
+</div>
+<%- include('./footer.ejs') %>

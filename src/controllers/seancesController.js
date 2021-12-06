@@ -5,6 +5,7 @@ class seancesController{
     async createSeance(req,res){
         db.select().table('films').first().where({id_film:req.body.sFilm}).then(dataF =>{
             db.select().table('salles').first().where({id_salle:dataF.id_salle}).then(async (dataS) =>{
+                // quand une seule séance est crée petit bug a fix ( début de test avec le if else)
                 //if(req.body.sDate[1]){
                     for (let x=0;x<req.body.sDate.length;x++){
                         let end = ":00"
@@ -44,7 +45,25 @@ class seancesController{
                 }*/
             })
         })
-            res.redirect('http://localhost:3000')
+            res.redirect('/')
+        }
+        async deleteSeance(req, res,id){
+            id = req.params.ID
+            try {
+                await db('seances').where({id_seance : id}).del().then((ret) =>{
+                    res.redirect('/')
+                })
+            } catch (err){
+                console.log(err);
+            }
+        }
+        async updateSeance(req,res,id){
+            try{
+                const id = await seancesService.updateSeance(req.body);
+                res.redirect('/')
+            } catch(err){
+                console.log(err);
+            }
         }
 }
 module.exports = new seancesController();

@@ -21,7 +21,6 @@ class usersController{
             if (log!=404){
                 req.session.role = log.role
                 req.session.user_id = log.id_user
-                console.log(req.session)
                 res.redirect('/')
                 } else {
                     res.status(201).json({
@@ -30,6 +29,24 @@ class usersController{
                     })
                 }
         } catch(err) {
+            console.log(err);
+        }
+    }
+    async updateUser(req,res){
+        try {
+            const id = await usersService.updateUser(req.body);
+            res.redirect('/')
+        } catch (err){
+            console.log(err);
+        }
+    }
+    async deleteUser(req, res,id){
+        id = req.params.ID
+        try {
+            await db('users').where({id_user : id}).del().then((ret) =>{
+                res.redirect('/')
+            })
+        } catch (err){
             console.log(err);
         }
     }

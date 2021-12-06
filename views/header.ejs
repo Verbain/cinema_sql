@@ -45,13 +45,17 @@
         <%}%>
         <% if(session.role == 'user'){%>
           <li class="nav-item active mx-3">
-            <a class="nav-link" href=""><strong>redirect3</strong></a>
+            <a class="nav-link" href="search/2021-12-05/2021-12-06"><strong>search by date</strong></a>
           </li>
         <%}%>
         <% if(session.role == 'admin'){%>
         <li class="nav-item active mx-3"><a class="nav-link" href="/seance"><strong></strong>create seance</strong></a></li>
         <li class="nav-item active mx-3"><a class="nav-link" href="/film"><strong></strong>create film</strong></a></li>
         <li class="nav-item active mx-3"><a class="nav-link" href="/salle"><strong></strong>create salle</strong></a></li>
+        <li class="nav-item active mx-3"><a class="nav-link" href="/listusers"><strong></strong>list users</strong></a></li>
+        <li class="nav-item active mx-3"><a class="nav-link" href="/listsalles"><strong></strong>list salles</strong></a></li>
+        <li class="nav-item active mx-3"><a class="nav-link" href="/listfilms"><strong></strong>list films</strong></a></li>
+        <li class="nav-item active mx-3"><a class="nav-link" href="/listseances"><strong></strong>list seances</strong></a></li>
         <%}%>
       </ul>
     </div>

@@ -1,9 +1,13 @@
 const sallesDAO = require('../DAO/sallesDAO');
 
 class sallesService{
-    createSalle(usersDTO){
-        const {salleName,nbPlace}=usersDTO;
+    createSalle(sallesDTO){
+        const {salleName,nbPlace}=sallesDTO;
         return sallesDAO.createSalle(salleName,nbPlace)
+    }
+    updateSalle(sallesDTO){
+        const {id,salleName,nbPlace}=sallesDTO;
+        return sallesDAO.updateSalle(id,salleName,nbPlace)
     }
 }
 

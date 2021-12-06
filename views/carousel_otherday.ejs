@@ -16,6 +16,7 @@
                         <div class="info1">
                             <%= dataW[i].film_name %>
                             <br/>
+                            <a href='/filminfo/<%=dataW[i].id_film%>'>film info</a>
                             <br/>
                             <span<% if(dataW[i].nb_place==0) {%> style="color:red" <%}else{%> style="color:green"<%}%> >place restante : <%= dataW[i].nb_place %> </span>
                         </div>

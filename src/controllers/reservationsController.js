@@ -7,15 +7,11 @@ class reservationsController{
 
             db.select().table('seances').where({id_seance : req.body.IDseance}).first().then(async (data)=>{
                 let verification = data.nb_place - req.body.quantity
-
                 if(verification < 0 ){
-                    console.log('reservation impossible') 
                 } else {
                     try{
                         const id = await reservationsService.createReservation(req.body);
-                        res.status(201).json({
-                            response: "reservation complete"
-                        })
+                        res.redirect('/succesReservation')
                     }catch(err) {
                         console.log(err);
                     }
