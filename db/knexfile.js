@@ -7,9 +7,9 @@ module.exports = {
     connection: {
       host : 'localhost',
       port : 3306,
-      user : 'root',
-      password : 'vanille95370',
-      database : 'cinema'
+      user : process.env.DATABASE_USER,
+      password : process.env.DATABASE_PASSWORD,
+      database : process.env.DATABASE_DATABASE
     },
     pool: {
       min: 2,
